@@ -64,9 +64,7 @@ describe('cli', function(){
 
       it('should recover', function(done) {
 
-        nockhelper.nock('https://management.core.windows.net')
-        //nockhelper.nock('https://managementnext.rdfetest.dnsdemo4.com')
-          .log(console.log)
+        nockhelper.nock('https://management.core.windows.net')        
           .post('/ba090344-f0ae-4520-b8a0-205635df65ed/services/mobileservices/mobileservices/pbadvisorsdemo/recover?targetMobileService=pb617')
           .reply(200, "", { 'cache-control': 'no-cache',
           pragma: 'no-cache',
@@ -91,25 +89,10 @@ describe('cli', function(){
           server: '33.0.6190.871 (rd_rdfe_n.130610-2140) Microsoft-HTTPAPI/2.0',
           'x-ms-request-id': '597f23a22ec645b398e0fb68f8d8967d',
           date: 'Tue, 18 Jun 2013 17:09:47 GMT' });
-
-        // var scope = nockhelper.nock('https://management.core.windows.net')
-        //   //.log(console.log)
-        //   .post('/ba090344-f0ae-4520-b8a0-205635df65ed/services/mobileservices/mobileservices/foo/recover?targetMobileService=bar')
-        //   .reply(200)
-        //   .delete('/ba090344-f0ae-4520-b8a0-205635df65ed/applications/barmobileservice')
-        //   .reply(202, {
-        //     'x-ms-request-id': 'ef428fef8f634ac3b6368f3c0af84cb3'
-        //   })        
-        //   .get('/ba090344-f0ae-4520-b8a0-205635df65ed/operations/ef428fef8f634ac3b6368f3c0af84cb3')
-        //   .reply(200, '<Operation xmlns=\"http://schemas.microsoft.com/windowsazure\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ID>ef428fef-8f63-4ac3-b636-8f3c0af84cb3</ID><Status>Succeeded</Status><HttpStatusCode>200</HttpStatusCode></Operation>')
-        //   ;
-
-        //nockhelper.nock.recorder.rec();
         
         var cmd = ('node cli.js mobile recover pbadvisorsdemo pb617 -q -s ba090344-f0ae-4520-b8a0-205635df65ed').split(' ');
-        executeCmd(cmd, function (result) {
-          console.log(result);
-          //result.exitStatus.should.equal(0);          
+        executeCmd(cmd, function (result) {          
+          result.exitStatus.should.equal(0);          
           done();
         });
       });
